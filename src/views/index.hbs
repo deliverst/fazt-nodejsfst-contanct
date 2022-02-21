@@ -1,0 +1,60 @@
+<div class="col-md-6 offset-md-3">
+    <h1>Contactos</h1>
+
+    <form action="{{#unless  contact.id }}/new-contact{{else}} /update-contact/{{contact.id}} {{/unless}}" method="POST">
+        <div class="row">
+            <div class="col">
+                <label for="name">Name</label>
+                <input type="text" class="form-control mb-2" name="name" placeholder="name" value="{{contact.name}}">
+            </div>
+            <div class="col">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control mb-2" name="lastName" placeholder="lastName" value="{{contact.lastName}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="phone">Phone</label>
+                <input type="text" name="phone" placeholder="phone" value="{{contact.phone}}" class="form-control mb-2">
+            </div>
+            <div class="col">
+                <label for="email">Email</label>
+                <input type="text" name="email" placeholder="email" value="{{contact.email}}" class="form-control mb-2">
+            </div>
+
+        </div>
+        {{#if contact.id}}
+            <div class="text-center mb-4">
+                <button class="btn btn-primary btn-block">Actualizar</button>
+                <a href="/" class="btn btn-secondary">Cancelar</a>
+            </div>
+        {{else}}
+            <div class="text-center mb-4">
+                <button class="btn btn-primary btn-block">Guardar</button>
+            </div>
+        {{/if}}
+    </form>
+
+    <div class="card">
+        <div class="card-header bg-dark text-light">
+            <h1 class="h4 text-white">Contacto List</h1>
+        </div>
+        <ul class="list-group">
+            <div class="card-body">
+                {{#if contact}}
+                    {{#each contact }}
+                        <li class="list-group-item justify-content-between flex align-items-center">
+                        <h3>{{name}} {{lastName}}</h3>
+                        <p>{{phone}}</p>
+                        <p>{{email}}</p>
+                        <a class="btn btn-secondary" href="/edit-contact/{{id}}">Editar</a>
+                        <a class="btn btn-danger" href="/delete-contact/{{id}}">Eliminar</a>
+                        </li>
+                    {{/each}}
+                {{else}}
+                    <p class="text-center">no hay contactos aun</p>
+                {{/if}}
+            </div>
+        </ul>
+    </div>
+</div>
